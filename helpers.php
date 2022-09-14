@@ -336,7 +336,7 @@ function CR51BLOCKER($ip, $bots)
 {
     $token = CR51INI('TOKEN');
     $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, "https://api.cr51.net/v1/blocker?token=" . $token . "&bots=" . $bots . "&ip=" . $ip . "");
+    curl_setopt($ch, CURLOPT_URL, "https://api.cr51.host/v1/blocker?token=" . $token . "&bots=" . $bots . "&ip=" . $ip . "");
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
     $data = curl_exec($ch);
     curl_close($ch);
@@ -354,7 +354,7 @@ function CR51BLOCKER($ip, $bots)
 function CR51NETWORK($ip)
 {
     $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, "https://api.cr51.net/json?ip=" . $ip . "");
+    curl_setopt($ch, CURLOPT_URL, "https://api.cr51.host/json?ip=" . $ip . "");
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
     $data = curl_exec($ch);
     curl_close($ch);
